@@ -29,11 +29,13 @@ public class Stock implements Serializable {
     protected Long id;
 
     private static final String TEMPLATE =
-            "http://finance.yahoo.com/webservice/v1/symbols/%s/quote?format=json";
+            "http://dev.markitondemand.com/Api/v2/Quote/json?symbol=%s";
 
     protected String name;
     protected String symbol;
     protected BigDecimal price;
+    protected BigDecimal change;
+    protected BigDecimal changePercent;
 
     static protected Logger logger = Logger.getLogger(Stock.class
             .getName());
@@ -41,11 +43,15 @@ public class Stock implements Serializable {
     @JsonCreator
     public Stock(@JsonProperty("name") String name,
                    @JsonProperty("symbol") String symbol,
-                   @JsonProperty("price") BigDecimal price) {
+                   @JsonProperty("price") BigDecimal price,
+                   @JsonProperty("change") BigDecimal change,
+                   @JsonProperty("changePercent") BigDecimal changePercent) {
         id = new Long(0);
         this.name = name;
         this.symbol = symbol;
         this.price = price;
+        this.change = change;
+        this.changePercent = changePercent;
     }
 
     public long getId() {
@@ -68,6 +74,14 @@ public class Stock implements Serializable {
         return price;
     }
 
+    public BigDecimal getChange() {
+        return change;
+    }
+
+    public BigDecimal getChangePercent()  {
+        return changePercent;
+    }
+
     protected void setName(String name) {
         this.name = name;
     }
@@ -78,6 +92,14 @@ public class Stock implements Serializable {
 
     protected void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    protected void setChange(BigDecimal change) {
+        this.change = change;
+    }
+
+    protected void setChangePercent(BigDecimal changePercent) {
+        this.changePercent = changePercent;
     }
 
     public static Stock findByStockName(String stockName) {
@@ -98,17 +120,13 @@ public class Stock implements Serializable {
                         sb.append(line);
                     }
                     br.close();
-                    String jsonString = sb.toString();
-                    logger.info("HERE - " + jsonString);
-                    JSONObject res = new JSONObject(jsonString);
-                    JSONObject list = res.getJSONObject("list");
-                    JSONArray stocks = list.getJSONArray("resources");
-                    JSONObject stock = stocks.getJSONObject(0).getJSONObject("resource");
-                    JSONObject fields = stock.getJSONObject("fields");
-                    String name = fields.getString("name");
-                    String symbol = fields.getString("symbol");
-                    BigDecimal price = fields.getBigDecimal("price");
-                    Stock ret = new Stock(name, symbol, price);
+                    JSONObject res = new JSONObject(sb.toString());
+                    String name = res.getString("Name");
+                    String symbol = res.getString("Symbol");
+                    BigDecimal price = res.getBigDecimal("LastPrice");
+                    BigDecimal change = res.getBigDecimal("Change");
+                    BigDecimal changePercent = res.getBigDecimal("ChangePercent");
+                    Stock ret = new Stock(name, symbol, price, change, changePercent);
                     return ret;
                 }
             } catch (Exception e) {
