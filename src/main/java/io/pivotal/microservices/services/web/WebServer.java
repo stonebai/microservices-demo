@@ -23,6 +23,7 @@ public class WebServer {
 	 * doesn't matter.
 	 */
 	public static final String ACCOUNTS_SERVICE_URL = "http://ACCOUNTS-SERVICE";
+	public static final String WEATHER_SERVICE_URL = "http://WEATHER-SERVICE";
 
 	/**
 	 * Run the application using Spring Boot and an embedded servlet engine.
@@ -54,6 +55,26 @@ public class WebServer {
 	@Bean
 	public WebAccountsController accountsController() {
 		return new WebAccountsController(accountsService());
+	}
+
+	/**
+	 * The WeatherService encapsulates the interaction with the micro-service.
+	 *
+	 * @return A new service instance.
+	 */
+	@Bean
+	public WebWeatherService weatherService() {
+		return new WebWeatherService(WEATHER_SERVICE_URL);
+	}
+
+	/**
+	 * Create the controller, passing it the {@link WebAccountsService} to use.
+	 *
+	 * @return
+	 */
+	@Bean
+	public WebWeatherController weatherController() {
+		return new WebWeatherController(weatherService());
 	}
 
 	@Bean

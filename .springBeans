@@ -11,8 +11,10 @@
 	<autoconfigs>
 		<config>java:io.pivotal.microservices.services.registration.RegistrationServer</config>
 		<config>java:io.pivotal.microservices.accounts.AccountsWebApplication</config>
+		<config>java:io.pivotal.microservices.weather.WeatherWebApplication</config>
 		<config>java:io.pivotal.microservices.services.web.WebServer</config>
 		<config>java:io.pivotal.microservices.services.accounts.AccountsServer</config>
+		<config>java:io.pivotal.microservices.services.weather.WeatherServer</config>
 	</autoconfigs>
 	<configSets>
 		<configSet>
@@ -21,7 +23,9 @@
 			<incomplete>false</incomplete>
 			<configs>
 				<config>java:io.pivotal.microservices.services.accounts.AccountsServer</config>
+				<config>java:io.pivotal.microservices.services.weather.WeatherServer</config>
 				<config>java:io.pivotal.microservices.accounts.AccountsWebApplication</config>
+				<config>java:io.pivotal.microservices.weather.WeatherWebApplication</config>
 				<config>java:io.pivotal.microservices.services.registration.RegistrationServer</config>
 				<config>java:io.pivotal.microservices.services.web.WebServer</config>
 			</configs>

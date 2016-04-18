@@ -2,6 +2,7 @@ package io.pivotal.microservices.services;
 
 import io.pivotal.microservices.services.accounts.AccountsServer;
 import io.pivotal.microservices.services.registration.RegistrationServer;
+import io.pivotal.microservices.services.weather.WeatherServer;
 import io.pivotal.microservices.services.web.WebServer;
 
 import org.springframework.boot.SpringApplication;
@@ -44,6 +45,8 @@ public class Main {
 			SpringApplication.run(AccountsServer.class, args);
 		} else if (serverName.equals("web")) {
 			SpringApplication.run(WebServer.class, args);
+		} else if (serverName.equals("weather")) {
+			SpringApplication.run(WeatherServer.class, args);
 		} else {
 			System.out.println("Unknown server type: " + serverName);
 			usage();

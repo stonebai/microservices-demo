@@ -1,0 +1,27 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+<h1>Weather Details</h1>
+
+<dl class="dl-horizontal">
+    <dt>Location</dt>
+    <dd th:text="${weather.location}">number</dd>
+    <dt>Description</dt>
+    <dd th:text="${weather.description}">number</dd>
+    <dt>Temperature</dt>
+    <dd th:text="${weather.temperature}">number</dd>
+</dl>
+
+<div style="height: 2cm">&nbsp;</div>
+
+<div style="text-align: right">
+    Options: <a th:href="@{/}">Home</a>
+</div>
+
+<div th:replace="footer :: copy"></div>
+</body>
+</html>
