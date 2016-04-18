@@ -23,6 +23,7 @@ public class WebServer {
 	 * doesn't matter.
 	 */
 	public static final String ACCOUNTS_SERVICE_URL = "http://ACCOUNTS-SERVICE";
+	public static final String STOCK_SERVICE_URL = "http://STOCK-SERVICE";
 	public static final String WEATHER_SERVICE_URL = "http://WEATHER-SERVICE";
 
 	/**
@@ -57,6 +58,26 @@ public class WebServer {
 		return new WebAccountsController(accountsService());
 	}
 
+	/**
+	 * The StockService encapsulates the interaction with the micro-service.
+	 *
+	 * @return A new service instance.
+	 */
+	@Bean
+	public WebStockService stockService() {
+		return new WebStockService(STOCK_SERVICE_URL);
+	}
+
+	/**
+	 * Create the controller, passing it the {@link WebStockService} to use.
+	 *
+	 * @return
+	 */
+	@Bean
+	public WebStockController stockController() {
+		return new WebStockController(stockService());
+	}
+	
 	/**
 	 * The WeatherService encapsulates the interaction with the micro-service.
 	 *
