@@ -24,6 +24,7 @@ public class WebServer {
 	 */
 	public static final String ACCOUNTS_SERVICE_URL = "http://ACCOUNTS-SERVICE";
 	public static final String STOCK_SERVICE_URL = "http://STOCK-SERVICE";
+	public static final String LOCATION_SERVICE_URL = "http://LOCATION-SERVICE";
 	public static final String WEATHER_SERVICE_URL = "http://WEATHER-SERVICE";
 
 	/**
@@ -77,7 +78,27 @@ public class WebServer {
 	public WebStockController stockController() {
 		return new WebStockController(stockService());
 	}
-	
+
+	/**
+	 * The LocationService encapsulates the interaction with the micro-service.
+	 *
+	 * @return A new service instance.
+	 */
+	@Bean
+	public WebLocationService locationService() {
+		return new WebLocationService(LOCATION_SERVICE_URL);
+	}
+
+	/**
+	 * Create the controller, passing it the {@link WebLocationService} to use.
+	 *
+	 * @return
+	 */
+	@Bean
+	public WebLocationController locationController() {
+		return new WebLocationController(locationService());
+	}
+
 	/**
 	 * The WeatherService encapsulates the interaction with the micro-service.
 	 *
