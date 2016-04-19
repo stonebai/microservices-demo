@@ -3,6 +3,7 @@ package io.pivotal.microservices.services.location;
 import java.util.logging.Logger;
 
 import io.pivotal.microservices.location.LocationWebApplication;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

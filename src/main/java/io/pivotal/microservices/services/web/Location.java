@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
+ *
+ * Location DTO - used to interact with the {@link WebLocationService}.
+
  * Created by alicesypark on 4/18/16.
  */
 
@@ -16,8 +19,8 @@ public class Location {
 
     @JsonCreator
     public Location(@JsonProperty("longitude") double longitude,
-                 @JsonProperty("latitude") double latitude,
-                 @JsonProperty("formatted_address") String formatted_address) {
+                    @JsonProperty("latitude") double latitude,
+                    @JsonProperty("formatted_address") String formatted_address) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.formatted_address = formatted_address;
@@ -27,23 +30,23 @@ public class Location {
         return longitude;
     }
 
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
     public double getLatitude() {
         return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public String getFormatted_address() {
         return formatted_address;
     }
 
-    protected void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    protected void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    protected void setFormatted_address(String formatted_address) {
+    public void setFormatted_address(String formatted_address) {
         this.formatted_address = formatted_address;
     }
 

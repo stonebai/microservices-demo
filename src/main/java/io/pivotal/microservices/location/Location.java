@@ -80,7 +80,7 @@ public class Location implements Serializable {
     }
 
     public static Location findByLocationName(String name) {
-
+        System.out.println(name);
         String url = String.format(TEMPLATE, name);
 
         while(true) {
